@@ -1,2 +1,12 @@
 /build
 .dart_tool/
+
+
+.idea
+android/app/.project
+android/app/.classpath
+android/.settings/org.eclipse.buildship.core.prefs
+android/app/.settings/org.eclipse.buildship.core.prefs
+android/demo_android.iml
+android/.project
+.idea/workspace.xml
