@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(new ParentWidgetA());
+  runApp(ParentWidgetA());
 }
 
 class MyApp extends StatelessWidget {
@@ -71,19 +71,19 @@ class _MyHomePageState extends State<MyHomePage> {
         //     ),
         //   ],
         // ),
-        child: new Builder(builder: (context) {
+        child: Builder(builder: (context) {
           return RaisedButton(
             onPressed: () {
               // ScaffoldState _state =
               //     context.findAncestorStateOfType<ScaffoldState>();
               // ScaffoldState _state = Scaffold.of(context);
               // _state.showSnackBar(SnackBar(
-              //   content: new Text('snackbar content'),
+              //   content:  Text('snackbar content'),
               // ));
               ScaffoldState _state = _globalKey.currentState;
               _state.openDrawer();
             },
-            child: new Text('raised button'),
+            child: Text('raised button'),
           );
         }),
       ),
@@ -130,20 +130,20 @@ class _TabboxAState extends State<TabboxA> {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTap: _setTap,
-      child: new Container(
-        child: new Center(
-          child: new Text(
+      child: Container(
+        child: Center(
+          child: Text(
             _active ? 'active' : 'inactive',
-            style: new TextStyle(fontSize: 32.0, color: Colors.white),
+            style: TextStyle(fontSize: 32.0, color: Colors.white),
             textDirection: TextDirection.ltr,
           ),
         ),
         width: 200.0,
         height: 200.0,
         decoration:
-            new BoxDecoration(color: _active ? Colors.lightGreen : Colors.grey),
+            BoxDecoration(color: _active ? Colors.lightGreen : Colors.grey),
       ),
     );
   }
@@ -166,8 +166,7 @@ class _ParentWidgetState extends State<ParentWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: new TapBoxB(acitve: _active, onChanged: _setTapChange));
+    return Container(child: TapBoxB(acitve: _active, onChanged: _setTapChange));
   }
 }
 
@@ -182,19 +181,19 @@ class TapBoxB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var gestureDetector = new GestureDetector(
+    var gestureDetector = GestureDetector(
       onTap: _handleTap,
-      child: new Container(
-        child: new Center(
-          child: new Text(
+      child: Container(
+        child: Center(
+          child: Text(
             acitve ? 'active' : 'inactive',
-            style: new TextStyle(fontSize: 32.0, color: Colors.white),
+            style: TextStyle(fontSize: 32.0, color: Colors.white),
             textDirection: TextDirection.ltr,
           ),
         ),
         width: 200.0,
         height: 200.0,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             color: acitve ? Colors.lightGreen[300] : Colors.grey[300]),
       ),
     );
@@ -219,7 +218,7 @@ class _ParentWidgetAState extends State<ParentWidgetA> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: new TabboxB(active: _active, onChanged: _setTap));
+    return Container(child: TabboxB(active: _active, onChanged: _setTap));
   }
 }
 
@@ -248,23 +247,66 @@ class _TabboxBState extends State<TabboxB> {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTapDown: setTapDown,
       onTapUp: setTapUp,
-      child: new Container(
-        child: new Center(
-            child: new Text(
-          widget.active ? 'active' : 'inactive',
-          style: new TextStyle(fontSize: 32.0, color: Colors.green[300]),
-          textDirection: TextDirection.ltr,
-        )),
+      child: Container(
+        child: Center(
+          //     child:  Text(
+          //   widget.active ? 'active' * 10 : 'inactive widget ' * 10,
+          //   textAlign: TextAlign.left,
+          //   maxLines: 2,
+          //   overflow: TextOverflow.ellipsis,
+          //   textScaleFactor: 1.5,
+          //   style:  TextStyle(
+          //       fontSize: 13.0,
+          //       color: Colors.lightGreen[300],
+          //       Color: Colors.grey,
+          //       decorationStyle: TextDecorationStyle.double,
+          //       decoration: TextDecoration.underline),
+          //   textDirection: TextDirection.rtl,
+          // )),
+          child: Text.rich(
+            TextSpan(children: [
+              TextSpan(text: "home ", style: TextStyle(color: Colors.red)),
+              TextSpan(
+                  text: 'http://www.google.com/',
+                  style: TextStyle(color: Colors.blue)),
+            ]),
+            textDirection: TextDirection.ltr,
+          ),
+        ),
         width: 300.0,
         height: 300.0,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           color: widget.active ? Colors.lightGreen : Colors.grey[300],
-          border: _heightlight
-              ? new Border.all(color: Colors.red, width: 10.0)
-              : null,
+          border:
+              _heightlight ? Border.all(color: Colors.red, width: 10.0) : null,
+        ),
+      ),
+    );
+  }
+}
+
+class DefaultStyle extends StatelessWidget {
+  const DefaultStyle({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: DefaultTextStyle(
+        style: TextStyle(color: Colors.greenAccent[300], fontSize: 20.0),
+        textAlign: TextAlign.left,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text('header h1'),
+            Text('header h2'),
+            Text(
+              'hello h3',
+              style: TextStyle(inherit: true),
+            )
+          ],
         ),
       ),
     );
